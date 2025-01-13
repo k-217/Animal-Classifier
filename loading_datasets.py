@@ -1,5 +1,7 @@
 '''
 
+This piece of code loads the image folders for training, validation, and testing, along with the classes.txt and predicate-matrix-binary.txt files.
+
 Data Preprocessing: 
     - made changes to classes.txt and predicate-matrix-binary.txt
       to account for the missing classes in the training data
