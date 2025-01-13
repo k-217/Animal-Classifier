@@ -154,7 +154,7 @@ for epoch in range(NUM_EPOCHS):
         total_train_loss += loss.item()
         train_correct += (pred_classes.argmax(1) == labels).type(torch.float).sum().item()
 
-        train_bar.set_postfix(loss = f"{total_train_loss/len(loading_datasets.train_loader.dataset):.4f}", progress = f"{(i + 1) / len(loading_datasets.train_loader) * 100:.2f}%")
+        train_bar.set_postfix(loss = f"{total_train_loss/len(loading_datasets.train_loader.dataset):.4f}", accuracy = train_correct/len(loading_datasets.train_loader.dataset), progress = f"{(i + 1) / len(loading_datasets.train_loader) * 100:.2f}%")
 
     train_loss = total_train_loss/len(loading_datasets.train_loader.dataset)
     train_accuracy = train_correct/len(loading_datasets.train_loader.dataset)
@@ -186,7 +186,7 @@ for epoch in range(NUM_EPOCHS):
             total_val_loss += loss.item()
             val_correct += (pred_classes.argmax(1) == labels).type(torch.float).sum().item()
 
-            val_bar.set_postfix(loss = f"{total_val_loss/len(loading_datasets.val_loader.dataset):.4f}", progress = f"{(i + 1) / len(loading_datasets.val_loader) * 100:.6f}%")
+            val_bar.set_postfix(loss = f"{total_val_loss/len(loading_datasets.val_loader.dataset):.4f}", accuracy = val_correct/len(loading_datasets.val_loader.dataset), progress = f"{(i + 1) / len(loading_datasets.val_loader) * 100:.6f}%")
 
         val_loss = total_val_loss/len(loading_datasets.val_loader.dataset)
         val_accuracy = val_correct/len(loading_datasets.val_loader.dataset)
