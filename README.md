@@ -143,3 +143,7 @@ Animal Classifer is a basic neural network setup for image classification into c
 ## Conclusion
 
 While the model demonstrates low/moderate accuracy, it underscores the importance of experimentation and theoretical grounding in building custom architectures. Model performance is limited by hyperparameter choices and the absence of pretrained architectures. Future work could involve hyperparameter tuning, incorporating PCA, leveraging embeddings for semantic relationships, and explicitly implementing zero-shot learning.
+
+## Reference
+
+This is a submission to the Pixel Play Challenge by Vision and Language Group, IIT Roorkee. The problem statement and referenced data may be found on [Kaggle](https://www.kaggle.com/competitions/vlg-recruitment-24-challenge/). 
