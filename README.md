@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Animal Classifer is a basic neural network setup for image classification into classes of animals. It employs multi-task learning to predict both class labels and semantic features (predicates). The project focuses on building the model from scratch without pretrained architectures to reinforce foundational understanding of convolutional neural networks (CNNs).
+This project is a basic neural network setup for image classification into classes of animals. Though it attempts to mimic how a human observes and infers, the simple rule behind it is to decipher the images into mathematical patterns and connect them to known categories and traits. The project focuses on building the model from scratch without pretrained architectures to reinforce foundational understanding of convolutional neural networks (CNNs). Major focus was put on improving its limited understanding from the meaningful features from images and further training it in a way that it interprets context beyond simply image patterns to the semantic features.
 
 ## Python Utilities
 
@@ -30,13 +30,19 @@ Animal Classifer is a basic neural network setup for image classification into c
 
 - Randomly grouped into batches of 32 for applying mini-batch gradient descent later for the training.
 
+- Image Preprocessing:
+	- Resize(): resizes images to a standard size of 224x224 pixels using bilinear interpolation.
+	- ToTensor(): converts PIL image into tensor with pixel values scaled to [0, 1]
+	- Normalize(): normalizes the images using channel-wise mean and standard deviations (RGB channels), consistent with ImageNet standards
+		- Mean: [0.485, 0.456, 0.406]
+		- Standard Deviation: [0.229, 0.224, 0.225]
+		- Normalized Pixel Value $= \frac{Pixel Value - Mean}{Standard Deviation}$
+
+
 ### Data Augmentation
 - RandomHorizontalFlip(): randomly flips some of the images in the batches
 - ColorJitter(): randomly changes image brightness, contrast, saturation, and hue.
 - RandomAffine(): applies random affine transformations such as rotation, scaling, and translation
-- Resize(): resizes images to a standard size of 224x224 pixels using bilinear interpolation.
-- ToTensor(): converts PIL image into tensor with pixel values scaled to [0, 1]
-- Normalize(): normalizes the images using channel-wise mean and standard deviations, consistent with ImageNet standards
 
 ## Model Architecture
 
@@ -63,7 +69,7 @@ Animal Classifer is a basic neural network setup for image classification into c
     - all bias is set to zero
 
 - Optimizer
-    - Adam Optimizer
+    - Adam Optimizer: Adaptive Moment Estimation, a combination of the ‘gradient descent with momentum’ algorithm and the ‘RMSP’ algorithm.
     - Learning Rate = 1e-3
     - Weight Decay = 1e-4
 
@@ -112,7 +118,6 @@ Animal Classifer is a basic neural network setup for image classification into c
 
 - Validation and Test Accuracy: ~30-40%
 
-
 ## Process and Challenges Encountered
 
 - Initial implementation resulted in low accuracy (~10% on the test set). Subsequent iterations improved results through:
@@ -128,15 +133,35 @@ Animal Classifer is a basic neural network setup for image classification into c
 
 - Future directions include refining hyperparameters, exploring pretrained models, and explicitly implementing zero-shot learning.
 
+## Explainability Report
+
+In the way how a human would identify animals, the network followed this method for understanding images:
+- Edges and textures: The first layer identifies simple patterns like edges or corners, similar to how humans see outlines.
+
+- Complex structures: As the image passes through deeper layers, the model combines simple patterns to detect more complex features like a beak, claws, or fur patterns.
+
+- After extracting features, the model condenses the information into the most noticeable features while ignoring the unnecessary details (e.g., a lion's mane or an elephant’s trunk), using pooling layers.
+
+The performance of the model indicates that it does extract meaningful features for seen classes. These features likely include:
+- Distinct patterns like stripes for zebras.
+- Shape-based traits like trunks for elephants.
+- Texture-related features like fur or scales.
+
+The model achieves reasonable performance on unseen classes due to the semantic predicates (binary matrix) guiding the predictions. 
+- The predicate “stripes” helps identify unseen animals like okapis or other striped species.
+
+- The predicate “flys” aids in distinguishing birds from terrestrial animals.
+
+The accuracy gap highlights that the predicates and image features must be perfectly aligned for optimal performance, leaving a scope for future development.
+
+
 ## Learning Outcomes
 
 - Basic implementation of a neural network
 
 - Mathematics behind a deep learning model and the training algorithm: backpropagation
 
-- Tradeoff between accuracy, complexity, and computational overhead: fine-tuning the parameters
-
-- Iterative problem solving techniques
+- Tradeoff between accuracy, complexity, and computational overhead: fine-tuning the parameters, iterative problem solving techniques
 
 - Zero-shot learning concepts
 
