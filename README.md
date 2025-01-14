@@ -172,3 +172,7 @@ While the model demonstrates low/moderate accuracy, it underscores the importanc
 ## Reference
 
 This is a submission to the Pixel Play Challenge by Vision and Language Group, IIT Roorkee. The problem statement and referenced data may be found on [Kaggle](https://www.kaggle.com/competitions/vlg-recruitment-24-challenge/). 
+
+## Info
+
+the ```drafts``` folder contains previous codes that were improvised to get the final one. Feel free to ignore them.
